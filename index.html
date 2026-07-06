@@ -6,290 +6,229 @@
 <title>NIAT — Análise dos 5 Porquês</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; background: #e8e8e8; color: #1a1a1a; padding: 20px; font-size: 13px; }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #e0e0e0;
-  color: #1a1a1a;
-  padding: 20px;
-  font-size: 12px;
-}
-
-/* ── TOOLBAR ── */
-.toolbar {
-  max-width: 98vw;
-  margin: 0 auto 14px;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  align-items: center;
-}
+/* TOOLBAR */
+.toolbar { max-width: 1200px; margin: 0 auto 14px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 .toolbar button, .toolbar label, .toolbar select {
-  font-family: Arial, sans-serif;
-  font-size: 12px;
-  padding: 7px 14px;
-  border-radius: 5px;
-  border: 1px solid #bbb;
-  cursor: pointer;
-  background: #fff;
+  font-family: Arial, sans-serif; font-size: 12px; padding: 7px 14px;
+  border-radius: 5px; border: 1px solid #bbb; cursor: pointer; background: #fff;
 }
 .toolbar button.primary { background: #1a3a5c; color: #fff; border-color: #1a3a5c; font-weight: bold; }
-.toolbar button:hover   { opacity: 0.85; }
-.toolbar label          { background: #f5f5f5; font-weight: bold; pointer-events: none; }
+.toolbar button:hover { opacity: 0.85; }
+.toolbar label { background: #f5f5f5; font-weight: bold; pointer-events: none; }
 
-/* ── PAGE ── */
-.page {
-  background: #fff;
-  max-width: 98vw;
-  margin: 0 auto;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.14);
-  border-top: 5px solid #1a3a5c;
-}
+/* PAGE */
+.page { background: #fff; max-width: 1200px; margin: 0 auto; box-shadow: 0 4px 24px rgba(0,0,0,0.14); border-top: 5px solid #1a3a5c; }
 
-/* ── HEADER ── */
-.header {
-  background: #fff;
-  border-bottom: 2px solid #e0e0e0;
-  padding: 14px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-}
+/* HEADER */
+.header { background: #fff; border-bottom: 2px solid #e0e0e0; padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .header img.logo { height: 56px; width: auto; object-fit: contain; flex-shrink: 0; }
 .header-center { text-align: center; flex: 1; }
-.header-center .doc-title {
-  font-size: 16px; font-weight: 900; letter-spacing: 1px;
-  text-transform: uppercase; color: #1a3a5c;
-}
+.header-center .doc-title { font-size: 16px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; color: #1a3a5c; }
 .header-center .doc-code { font-size: 10px; color: #888; margin-top: 3px; }
-.header-meta { font-size: 11px; color: #555; text-align: right; line-height: 2.1; }
-.editable-inline {
-  outline: none; border-bottom: 1px solid #ccc; min-width: 80px;
-  display: inline-block; font-size: 11px; color: #1a1a1a;
-}
+.header-meta { font-size: 11px; color: #555; text-align: right; line-height: 2.2; }
+.editable-inline { outline: none; border-bottom: 1px solid #ccc; min-width: 80px; display: inline-block; font-size: 11px; }
 .editable-inline:focus { border-bottom-color: #1a3a5c; }
 
-/* ── SEVERITY BAND ── */
-.severity-band {
-  padding: 9px 24px; font-size: 12px; font-weight: 900;
-  letter-spacing: 1px; text-transform: uppercase; text-align: center;
-  background: #B71247; color: #fff; cursor: pointer; user-select: none;
-}
-.severity-band.leve      { background: #E07B00; }
+/* SEVERITY BAND */
+.severity-band { padding: 9px 28px; font-size: 12px; font-weight: 900; letter-spacing: 1px; text-transform: uppercase; text-align: center; background: #B71247; color: #fff; cursor: pointer; user-select: none; }
+.severity-band.leve { background: #E07B00; }
 .severity-band.incidente { background: #2e7d32; }
-.sev-hint { font-size: 9px; font-weight: normal; opacity: 0.7; margin-left: 8px; text-transform: none; }
+.sev-hint { font-size: 9px; font-weight: normal; opacity: 0.75; margin-left: 8px; text-transform: none; }
 
-/* ── SECTION ── */
-.section { padding: 14px 24px; border-bottom: 1px solid #ececec; }
-.section-title {
-  font-size: 10px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 1px; color: #1a3a5c; margin-bottom: 10px;
-  padding-bottom: 4px; border-bottom: 2px solid #1a3a5c;
-}
+/* SECTION */
+.section { padding: 16px 28px; border-bottom: 1px solid #e8e8e8; }
+.section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: #1a3a5c; margin-bottom: 12px; padding-bottom: 5px; border-bottom: 2px solid #1a3a5c; }
 
-/* ── ID GRID ── */
-.id-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
-.id-field label { display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; color: #999; margin-bottom: 3px; }
-.id-field .val  {
-  background: #f5f5f5; border-radius: 3px; padding: 5px 8px;
-  min-height: 26px; font-size: 12px; outline: none; border: 1px solid transparent;
-}
+/* ID GRID */
+.id-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.id-field label { display: block; font-size: 9px; font-weight: 700; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+.id-field .val { background: #f5f5f5; border-radius: 4px; padding: 6px 9px; min-height: 28px; font-size: 12px; outline: none; border: 1px solid transparent; width: 100%; font-family: Arial, sans-serif; }
 .id-field .val:focus { border-color: #1a3a5c; background: #eef3f8; }
 
-/* ── FENÔMENO ── */
-.fenomeno-box {
-  background: #f0f4f8; border-left: 5px solid #1a3a5c;
-  padding: 10px 14px; border-radius: 0 4px 4px 0;
-  font-size: 13px; line-height: 1.6; min-height: 50px;
-  outline: none; border-top: 1px solid transparent;
-  border-right: 1px solid transparent; border-bottom: 1px solid transparent;
-}
-.fenomeno-box:focus { border-color: #1a3a5c; }
+/* FENÔMENO */
+.fenomeno-box { background: #f0f4f8; border-left: 5px solid #1a3a5c; border-top: none; border-right: none; border-bottom: none; padding: 10px 14px; font-size: 13px; line-height: 1.6; min-height: 52px; outline: none; border-radius: 0 4px 4px 0; width: 100%; resize: vertical; font-family: Arial, sans-serif; color: #1a1a1a; }
+.fenomeno-box:focus { background: #e8eef5; }
+.fenomeno-box::placeholder { color: #aaa; font-style: italic; }
 
-/* ═══════════════════════════════════════════════════
-   MATRIZ
-═══════════════════════════════════════════════════ */
-.matrix-section { padding: 16px 24px; border-bottom: 1px solid #ececec; }
+/* PROBLEMA ÚNICO */
+.problema-section { padding: 14px 28px 16px; border-bottom: 1px solid #e8e8e8; }
+.problema-label { font-size: 9px; font-weight: 700; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+.problema-box { background: #eef3f8; border-top: 1.5px solid #c5cfe0; border-right: 1.5px solid #c5cfe0; border-bottom: 1.5px solid #c5cfe0; border-left: 5px solid #1a3a5c; padding: 10px 14px; font-size: 13px; font-weight: bold; color: #1a3a5c; line-height: 1.6; min-height: 44px; outline: none; border-radius: 0 4px 4px 0; width: 100%; resize: vertical; font-family: Arial, sans-serif; }
+.problema-box:focus { background: #e0eaf5; }
+.problema-box::placeholder { color: #9aafc7; font-weight: normal; font-style: italic; }
 
-/* Cabeçalhos das colunas */
-.col-headers {
-  display: grid;
-  gap: 3px;
-  margin-bottom: 6px;
-}
-.ch {
-  padding: 7px 6px;
-  font-size: 9px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.4px; text-align: center; border-radius: 3px;
-  color: #fff; line-height: 1.3;
-}
-.ch-prob { background: #1a3a5c; }
-.ch-p1   { background: #1B5E20; }
-.ch-p2   { background: #2E7D32; }
-.ch-p3   { background: #388E3C; }
-.ch-p4   { background: #43A047; }
-.ch-p5   { background: #43A047; color: #fff; }
-.ch-acao { background: #C9A227; color: #1a1a1a; }
-.ch-resp { background: #b38a1f; color: #fff; }
-.ch-prazo{ background: #9a7519; color: #fff; }
+/* ══════════════════════════════════
+   SEÇÃO 3 — ANÁLISE DOS 5 PORQUÊS
+══════════════════════════════════ */
+.analise-section { padding: 16px 28px 24px; }
 
-/* Bloco de problema (agrupa várias linhas) */
-.problema-bloco {
-  border: 1.5px solid #d0d8e4;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  overflow: hidden;
-  position: relative;
+/* Bloco de cadeia */
+.cadeia-bloco {
+  background: #f4f4f4;
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: visible;
 }
 
-/* Barra de controle do bloco */
-.bloco-toolbar {
-  background: #f0f4f8;
-  padding: 4px 8px;
+/* Cabeçalho da cadeia */
+.cadeia-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #dce4ed;
-  gap: 6px;
+  padding: 10px 14px 8px;
 }
-.bloco-label {
-  font-size: 10px; font-weight: 700; color: #1a3a5c;
-  text-transform: uppercase; letter-spacing: 0.5px;
+.cadeia-titulo {
+  font-size: 13px;
+  font-weight: 700;
+  color: #333;
 }
-.bloco-btns { display: flex; gap: 5px; }
-.btn-sm {
-  font-size: 10px; padding: 3px 9px; border-radius: 3px;
-  border: 1px solid; cursor: pointer;
-  font-family: Arial, sans-serif; font-weight: bold;
+.cadeia-head-btns { display: flex; gap: 8px; }
+
+.btn-cadeia {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: 1.5px solid;
   white-space: nowrap;
 }
-.btn-add-linha { border-color: #2e7d32; background: #fff; color: #2e7d32; }
-.btn-add-linha:hover { background: #f0f8f0; }
-.btn-del-bloco { border-color: #ccc; background: #fff; color: #B71247; }
-.btn-del-bloco:hover { background: #fff5f7; }
+.btn-add-l { background: #fff; color: #2e7d32; border-color: #2e7d32; }
+.btn-add-l:hover { background: #f0fbf0; }
+.btn-del-l { background: #fff; color: #c0392b; border-color: #c0392b; }
+.btn-del-l:hover { background: #fff0ee; }
+.btn-del-cadeia { background: #fff; color: #7b1010; border-color: #7b1010; }
+.btn-del-cadeia:hover { background: #fff5f5; }
 
-/* Grid de linhas dentro do bloco */
-.bloco-linhas { }
+/* Grade de colunas */
+.grade-wrap { padding: 0 10px 10px; }
 
-/* Linha da matriz */
-.matriz-linha {
-  display: grid;
-  gap: 3px;
-  padding: 4px 6px;
-  border-bottom: 1px solid #f0f0f0;
-  align-items: stretch;
-  position: relative;
+/* Linha de cabeçalhos das colunas */
+.col-headers {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 4px;
+  padding: 0 24px 0 0; /* espaço p/ botão X */
 }
-.matriz-linha:last-child { border-bottom: none; }
-.matriz-linha:nth-child(even) { background: #fafafa; }
+.col-head {
+  border-radius: 5px;
+  padding: 6px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+/* larguras fixas — devem espelhar as células abaixo */
+.col-head.w-prob  { width: 90px;  background: #1a3a5c; }
+.col-head.w-pq    { flex: 1;      background: #2e7d32; }
+.col-head.w-acao  { width: 130px; background: #b8870a; }
+.col-head.w-resp  { width: 100px; background: #8a6510; }
+.col-head.w-prazo { width: 80px;  background: #6a4e0e; }
+
+/* Linha de dados */
+.grade-linha {
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  margin-bottom: 4px;
+  position: relative;
+  padding-right: 24px; /* espaço para o X */
+}
 
 /* Célula editável */
 .mcell {
-  border: 1px solid #e0e0e0;
-  border-radius: 3px;
-  padding: 5px 7px;
-  min-height: 48px;
+  border: 1.5px solid #d8d8d8;
+  border-radius: 5px;
+  padding: 6px 7px;
+  min-height: 52px;
   font-size: 12px;
-  line-height: 1.5;
+  line-height: 1.45;
   outline: none;
   font-family: Arial, sans-serif;
   color: #1a1a1a;
   background: #fff;
   word-break: break-word;
-  cursor: text;
+  flex-shrink: 0;
+  resize: none;
 }
-.mcell:focus { border-color: #1a3a5c; background: #f0f4f8; }
+.mcell:focus { border-color: #1a3a5c; background: #f5f8fc; }
 
-/* Célula de problema — visual azul */
-.mcell-problema {
-  background: #eef3f8;
-  border-color: #c5cfe0;
-  color: #1a3a5c;
+/* Larguras das células — espelham os col-heads */
+.mcell.w-prob  { width: 90px;  background: #e8ecf2; color: #1a3a5c; border-color: #c0cad8; }
+.mcell.w-pq    { flex: 1; }
+.mcell.w-acao  { width: 130px; }
+.mcell.w-resp  { width: 100px; }
+.mcell.w-prazo { width: 80px;  }
+
+/* Célula oculta (problema em linhas extras — não renderizada) */
+
+/* Botão X da linha */
+.btn-x-linha {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #c0392b;
+  font-size: 12px;
   font-weight: bold;
+  cursor: pointer;
+  padding: 2px 4px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  font-family: Arial, sans-serif;
+  line-height: 1;
 }
-.mcell-problema:focus { background: #e0eaf5; border-color: #1a3a5c; }
+.grade-linha:hover .btn-x-linha { opacity: 1; }
 
-/* Célula causa raiz — visual verde */
-.mcell-raiz {
-  background: #f1faf1;
-  border-color: #b2dfb5;
-  color: #1B5E20;
+/* Botão nova cadeia */
+.btn-nova-cadeia {
+  margin-top: 4px;
+  background: #1a3a5c;
+  color: #fff;
+  border: none;
+  padding: 9px 22px;
+  border-radius: 6px;
+  font-size: 12px;
   font-weight: bold;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
 }
-.mcell-raiz:focus { background: #e4f5e4; border-color: #2e7d32; }
+.btn-nova-cadeia:hover { background: #142e4e; }
 
-/* Célula oculta (problema nas linhas 2+) */
-.mcell-hidden {
-  background: transparent !important;
-  border-color: transparent !important;
-  pointer-events: none;
-  color: transparent;
-}
+/* RODAPÉ */
+.footer { background: #4a4a4a; color: rgba(255,255,255,0.9); padding: 16px 28px; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.footer-field { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.footer-field label { font-size: 9px; text-transform: uppercase; color: rgba(255,255,255,0.55); letter-spacing: 0.5px; }
+.footer-field .fval { color: #fff; font-weight: bold; background: rgba(255,255,255,0.08); border: none; border-bottom: 1.5px solid rgba(255,255,255,0.35); outline: none; font-family: Arial, sans-serif; font-size: 13px; padding: 4px 6px; border-radius: 2px 2px 0 0; min-width: 160px; }
+.footer-field .fval:focus { background: rgba(255,255,255,0.15); border-bottom-color: #C9A227; }
+.footer-field .fval::placeholder { color: rgba(255,255,255,0.3); font-weight: normal; font-style: italic; }
 
-/* Células de ação/resp/prazo — dourado */
-.mcell-acao { background: #fffde7; border-color: #e8d58a; }
-.mcell-acao:focus { border-color: #C9A227; background: #fff9d0; }
-.mcell-resp { background: #fff8d6; border-color: #ddc87a; }
-.mcell-resp:focus { border-color: #C9A227; }
-.mcell-prazo{ background: #fff3c4; border-color: #d4b86a; }
-.mcell-prazo:focus { border-color: #C9A227; }
-
-/* Botão deletar linha — aparece no hover */
-.btn-del-linha {
-  position: absolute; right: 3px; top: 50%; transform: translateY(-50%);
-  font-size: 10px; padding: 2px 5px; border-radius: 3px;
-  border: 1px solid #eee; background: #fff; color: #B71247;
-  cursor: pointer; font-family: Arial, sans-serif;
-  display: none; z-index: 2;
-}
-.matriz-linha:hover .btn-del-linha { display: block; }
-
-/* Botão adicionar bloco */
-.btn-add-bloco {
-  margin-top: 10px;
-  background: #1a3a5c; color: #fff; border: none;
-  padding: 8px 20px; border-radius: 4px; font-size: 12px;
-  cursor: pointer; font-family: Arial, sans-serif; font-weight: bold;
-}
-.btn-add-bloco:hover { opacity: 0.85; }
-
-/* ── RODAPÉ ── */
-.footer {
-  background: #6b6b6b; color: rgba(255,255,255,0.9);
-  padding: 12px 24px; display: flex;
-  justify-content: space-between; align-items: center; gap: 16px;
-}
-.footer-field { display: flex; flex-direction: column; gap: 3px; }
-.footer-field label { font-size: 9px; text-transform: uppercase; color: rgba(255,255,255,0.55); }
-.footer-field .fval {
-  color: #fff; font-weight: bold; background: transparent;
-  border: none; outline: none; font-family: Arial, sans-serif; font-size: 12px;
-}
-.footer-field .fval:focus { border-bottom: 1px solid rgba(255,255,255,0.4); }
-
-/* ── PRINT ── */
 @media print {
   body { background: #fff; padding: 0; }
-  .toolbar, .bloco-btns, .btn-add-bloco, .btn-del-linha { display: none !important; }
-  .page { box-shadow: none; max-width: 100%; }
-  .mcell { border: 1px solid #ccc !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .problema-bloco { break-inside: avoid; }
-  .sev-hint { display: none; }
+  .toolbar, .cadeia-head-btns, .btn-nova-cadeia, .btn-x-linha { display: none !important; }
+  .page { box-shadow: none; }
+  .mcell { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .cadeia-bloco { break-inside: avoid; }
 }
 </style>
 </head>
 <body>
 
-<!-- TOOLBAR -->
 <div class="toolbar">
-  <label>NIAT — 5 PORQUÊS</label>
+  <label>FOR 005-002 — 5 PORQUÊS</label>
   <select id="sev-select" onchange="setSeverity(this.value)">
     <option value="grave">🔴 Acidente Grave / Fatal</option>
     <option value="leve">🟠 Acidente Leve</option>
     <option value="incidente">🟢 Incidente / Quase Acidente</option>
   </select>
-  <button class="primary" onclick="window.print()">🖨️ Imprimir / Salvar como PDF</button>
+  <button class="primary" onclick="window.print()">🖨️ Imprimir / PDF</button>
 </div>
 
 <div class="page">
@@ -302,7 +241,7 @@ body {
       <div class="doc-code">FOR 005-002 &nbsp;·&nbsp; DB Agronegócios &nbsp;·&nbsp; Segurança do Trabalho</div>
     </div>
     <div class="header-meta">
-      <div><span style="color:#999;font-size:9px;text-transform:uppercase">Nº Ocorrência&nbsp;</span><span class="editable-inline" contenteditable="true">001/2025</span></div>
+      <div><span style="color:#999;font-size:9px;text-transform:uppercase">Nº do Relatório&nbsp;</span><span class="editable-inline" contenteditable="true">REL-001/2025</span></div>
       <div><span style="color:#999;font-size:9px;text-transform:uppercase">Data emissão&nbsp;</span><span class="editable-inline" id="data-emissao"></span></div>
       <div><span style="color:#999;font-size:9px;text-transform:uppercase">Versão&nbsp;</span>
         <select style="background:transparent;color:#555;border:none;border-bottom:1px solid #ccc;font-family:Arial,sans-serif;font-size:11px;outline:none;cursor:pointer">
@@ -312,94 +251,74 @@ body {
     </div>
   </div>
 
-  <!-- SEVERITY BAND -->
+  <!-- SEVERITY -->
   <div class="severity-band" id="sev-band" onclick="cycleSeverity()">
     ⚠ ACIDENTE GRAVE / FATAL
-    <span class="sev-hint">(clique para alternar classificação)</span>
+    <span class="sev-hint">(clique para alternar)</span>
   </div>
 
-  <!-- IDENTIFICAÇÃO -->
+  <!-- 1. IDENTIFICAÇÃO -->
   <div class="section">
     <div class="section-title">1. Identificação</div>
-    <div class="id-grid" style="grid-template-columns:repeat(4,1fr)">
-      <div class="id-field"><label>Data da ocorrência</label><div class="val" contenteditable="true"></div></div>
-      <div class="id-field"><label>Unidade</label><div class="val" contenteditable="true"></div></div>
-      <div class="id-field"><label>Nome do envolvido</label><div class="val" contenteditable="true"></div></div>
-      <div class="id-field"><label>Função</label><div class="val" contenteditable="true"></div></div>
+    <div class="id-grid" style="grid-template-columns: repeat(5, 1fr)">
+      <div class="id-field"><label>Nº do Relatório (NIAT)</label><input type="text" class="val" placeholder="Ex: REL-001/2026"></div>
+      <div class="id-field"><label>Data da ocorrência</label><input type="text" class="val" placeholder="DD/MM/AAAA"></div>
+      <div class="id-field"><label>Unidade</label>
+        <select class="val">
+          <option value="">— selecione —</option>
+          <option>Escritório Central</option>
+          <option>Estacionamento/Logística</option>
+          <option>Faz. Bom Retiro</option>
+          <option>Faz. Chuá</option>
+          <option>Faz. Saco São Francisco</option>
+          <option>Faz. Saco Tapera</option>
+          <option>Faz. São João</option>
+          <option>Granja Bom Retiro</option>
+          <option>Granja Saco São Francisco</option>
+          <option>Granja São João</option>
+          <option>Granjas Chuá</option>
+        </select>
+      </div>
+      <div class="id-field"><label>Nome do envolvido</label><input type="text" class="val"></div>
+      <div class="id-field"><label>Função</label><input type="text" class="val"></div>
     </div>
   </div>
 
-  <!-- FENÔMENO -->
+  <!-- 2. FENÔMENO -->
   <div class="section">
     <div class="section-title">2. Descrição da Ocorrência (Fenômeno)</div>
-    <div class="fenomeno-box" contenteditable="true">Descreva aqui a ocorrência — este é o ponto de partida da análise.</div>
+    <textarea class="fenomeno-box" placeholder="Descreva a ocorrência."></textarea>
   </div>
 
-  <!-- MATRIZ -->
-  <div class="matrix-section">
-    <div class="section-title" style="margin-bottom:12px">3. Análise dos 5 Porquês</div>
-
-    <!-- cabeçalhos — gerados por JS para manter sincronismo com grid -->
-    <div class="col-headers" id="col-headers"></div>
-
-    <!-- blocos de problema -->
-    <div id="blocos"></div>
-
-    <button class="btn-add-bloco" onclick="addBloco()">+ Novo problema / nova cadeia</button>
+  <!-- CADEIAS -->
+  <div class="analise-section" id="analise-section">
+    <div class="section-title" style="margin: 0 0 14px">3. Análise dos 5 Porquês</div>
+    <div id="cadeias-container"></div>
+    <button class="btn-nova-cadeia" onclick="novaCadeia()">+ Nova cadeia</button>
   </div>
 
   <!-- RODAPÉ -->
   <div class="footer">
-    <div class="footer-field">
-      <label>Técnico de Segurança</label>
-      <div class="fval" contenteditable="true"></div>
-    </div>
-    <div class="footer-field">
-      <label>Gerente Local</label>
-      <div class="fval" contenteditable="true"></div>
-    </div>
-    <div class="footer-field">
-      <label>Data de emissão</label>
-      <div class="fval" contenteditable="true"></div>
-    </div>
+    <div class="footer-field"><label>Técnico de Segurança</label><input class="fval" type="text" placeholder="Nome e CREA/CFT"></div>
+    <div class="footer-field"><label>Gerente Local</label><input class="fval" type="text" placeholder="Nome"></div>
+    <div class="footer-field"><label>Data de emissão</label><input class="fval" type="text" placeholder="DD/MM/AAAA"></div>
   </div>
 
-</div><!-- /page -->
+</div>
 
 <script>
-// ═══════════════════════════════════════════════════════
-//  CONFIGURAÇÃO DAS COLUNAS
-//  Altere os rótulos ou adicione/remova colunas aqui.
-// ═══════════════════════════════════════════════════════
-const COLUNAS = [
-  { id:'prob', label:'Problema',              cls:'ch-prob',  celCls:'mcell mcell-problema', w:'160px' },
-  { id:'p1',   label:'1º Por quê',            cls:'ch-p1',    celCls:'mcell',                w:'1fr'   },
-  { id:'p2',   label:'2º Por quê',            cls:'ch-p2',    celCls:'mcell',                w:'1fr'   },
-  { id:'p3',   label:'3º Por quê',            cls:'ch-p3',    celCls:'mcell',                w:'1fr'   },
-  { id:'p4',   label:'4º Por quê',            cls:'ch-p4',    celCls:'mcell',                w:'1fr'   },
-  { id:'p5',   label:'5º Por quê',             cls:'ch-p5',  celCls:'mcell',                w:'1fr'   },
-  { id:'acao', label:'Ação Recomendada',      cls:'ch-acao',  celCls:'mcell mcell-acao',     w:'180px' },
-  { id:'resp', label:'Responsável',           cls:'ch-resp',  celCls:'mcell mcell-resp',     w:'110px' },
-  { id:'prazo',label:'Prazo',                 cls:'ch-prazo', celCls:'mcell mcell-prazo',    w:'90px'  },
-];
-
-const GRID_TEMPLATE = COLUNAS.map(c => c.w).join(' ');
-
-// ═══════════════════════════════════════════════════════
-//  SEVERITY
-// ═══════════════════════════════════════════════════════
+// ── Severity ──────────────────────────────────────────
 const SEV = [
-  { cls:'',           band:'⚠ ACIDENTE GRAVE / FATAL',      val:'grave'     },
-  { cls:'leve',       band:'⚠ ACIDENTE LEVE',               val:'leve'      },
-  { cls:'incidente',  band:'⚠ INCIDENTE / QUASE ACIDENTE',  val:'incidente' },
+  { cls: '',           label: '⚠ ACIDENTE GRAVE / FATAL',     val: 'grave'     },
+  { cls: 'leve',       label: '⚠ ACIDENTE LEVE',              val: 'leve'      },
+  { cls: 'incidente',  label: '⚠ INCIDENTE / QUASE ACIDENTE', val: 'incidente' },
 ];
 let sevIdx = 0;
-function setSeverity(val) {
-  sevIdx = SEV.findIndex(s => s.val === val);
-  const band = document.getElementById('sev-band');
-  band.className = 'severity-band ' + SEV[sevIdx].cls;
-  band.innerHTML = SEV[sevIdx].band +
-    '<span class="sev-hint">(clique para alternar classificação)</span>';
+function setSeverity(v) {
+  sevIdx = SEV.findIndex(s => s.val === v);
+  const b = document.getElementById('sev-band');
+  b.className = 'severity-band ' + SEV[sevIdx].cls;
+  b.innerHTML = SEV[sevIdx].label + '<span class="sev-hint">(clique para alternar)</span>';
 }
 function cycleSeverity() {
   sevIdx = (sevIdx + 1) % SEV.length;
@@ -407,145 +326,176 @@ function cycleSeverity() {
   setSeverity(SEV[sevIdx].val);
 }
 
-// ═══════════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════════
+// ── Data automática ────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
-  // Data automática
-  const h = new Date();
-  const pad = n => String(n).padStart(2,'0');
+  const d = new Date();
+  const p = n => String(n).padStart(2, '0');
   document.getElementById('data-emissao').textContent =
-    `${pad(h.getDate())}/${pad(h.getMonth()+1)}/${h.getFullYear()}`;
-
-  // Cabeçalhos das colunas
-  const hdr = document.getElementById('col-headers');
-  hdr.style.gridTemplateColumns = GRID_TEMPLATE;
-  COLUNAS.forEach(c => {
-    const d = document.createElement('div');
-    d.className = 'ch ' + c.cls;
-    d.innerHTML = c.label.replace('\n','<br>');
-    hdr.appendChild(d);
-  });
-
-  // Primeiro bloco
-  addBloco();
+    p(d.getDate()) + '/' + p(d.getMonth() + 1) + '/' + d.getFullYear();
+  novaCadeia(); // primeira cadeia ao carregar
 });
 
-// ═══════════════════════════════════════════════════════
-//  BLOCOS
-// ═══════════════════════════════════════════════════════
-let blocoIdx = 0;
+// ── Cadeias ────────────────────────────────────────────
+let cadeiaCount = 0;
 
-function addBloco() {
-  blocoIdx++;
-  const id = 'bloco-' + blocoIdx;
-  const ehPrimeira = blocoIdx === 1;
-  const wrap = document.createElement('div');
-  wrap.className = 'problema-bloco';
-  wrap.id = id;
+function novaCadeia() {
+  cadeiaCount++;
+  const id = 'cadeia-' + cadeiaCount;
+  const n  = cadeiaCount;
 
-  // Barra do bloco
-  const tb = document.createElement('div');
-  tb.className = 'bloco-toolbar';
+  const bloco = document.createElement('div');
+  bloco.className = 'cadeia-bloco';
+  bloco.id = id;
 
-  const lbl = document.createElement('span');
-  lbl.className = 'bloco-label';
-  lbl.textContent = 'Cadeia ' + blocoIdx;
+  // ── Cabeçalho do bloco ──
+  bloco.innerHTML = `
+    <div class="cadeia-head">
+      <span class="cadeia-titulo">Cadeia ${String(n).padStart(2,'0')}</span>
+      <div class="cadeia-head-btns">
+        <button class="btn-cadeia btn-add-l" onclick="adicionarLinha('${id}', ${n}, false)">+ Linha</button>
+        <button class="btn-cadeia btn-del-l" onclick="removerUltimaLinha('${id}', ${n})">— Linha</button>
+        ${n > 1 ? `<button class="btn-cadeia btn-del-cadeia" onclick="removerCadeia('${id}')">✕ Cadeia</button>` : ''}
+      </div>
+    </div>
+    <div class="grade-wrap">
+      <div class="col-headers" id="${id}-headers"></div>
+      <div id="${id}-linhas"></div>
+    </div>`;
 
-  const btns = document.createElement('div');
-  btns.className = 'bloco-btns';
+  document.getElementById('cadeias-container').appendChild(bloco);
 
-  const btnLinha = document.createElement('button');
-  btnLinha.className = 'btn-sm btn-add-linha';
-  btnLinha.textContent = '+ Linha';
-  btnLinha.title = 'Adicionar linha de causa paralela';
-  btnLinha.onclick = () => addLinha(id, false, ehPrimeira);
+  // ── Cabeçalhos das colunas ──
+  const hdrEl  = document.getElementById(id + '-headers');
+  const heads  = ['Problema', '1° Porquê', '2° Porquê', '3° Porquê', '4° Porquê', '5° Porquê', '6° Porquê', 'Ação recomendada', 'Responsável', 'Prazo'];
+  const hClasses = ['w-prob', 'w-pq', 'w-pq', 'w-pq', 'w-pq', 'w-pq', 'w-pq', 'w-acao', 'w-resp', 'w-prazo'];
 
-  const btnDel = document.createElement('button');
-  btnDel.className = 'btn-sm btn-del-bloco';
-  btnDel.textContent = '✕ Remover';
-  btnDel.title = 'Remover esta cadeia';
-  btnDel.onclick = () => {
-    if (document.querySelectorAll('.problema-bloco').length > 1)
-      wrap.remove();
-    else alert('É necessário manter ao menos uma cadeia de análise.');
-  };
+  // Cadeia 1: cabeçalho completo com "Problema". Cadeia 2+: recuo via padding-left.
+  const recuo = n > 1 ? '98px' : '0'; // largura de w-prob (90px) + gap (4px) + margem (4px)
+  hdrEl.style.paddingLeft = recuo;
+  for (let i = 0; i < heads.length; i++) {
+    if (i === 0 && n > 1) continue; // pula "Problema" nas cadeias seguintes
+    const d = document.createElement('div');
+    d.className = 'col-head ' + hClasses[i];
+    d.textContent = heads[i];
+    hdrEl.appendChild(d);
+  }
 
-  btns.appendChild(btnLinha);
-  btns.appendChild(btnDel);
-  tb.appendChild(lbl);
-  tb.appendChild(btns);
-  wrap.appendChild(tb);
-
-  // Corpo das linhas
-  const corpo = document.createElement('div');
-  corpo.className = 'bloco-linhas';
-  corpo.id = id + '-linhas';
-  wrap.appendChild(corpo);
-
-  document.getElementById('blocos').appendChild(wrap);
+  // Mesmo recuo nas linhas de dados
+  document.getElementById(id + '-linhas').style.cssText = `padding-left:${recuo}`;
 
   // Primeira linha
-  addLinha(id, true, ehPrimeira);
+  adicionarLinha(id, n, true);
 }
 
-// ═══════════════════════════════════════════════════════
-//  LINHAS
-// ═══════════════════════════════════════════════════════
-function addLinha(blocoId, isPrimeira, temProblema) {
-  const corpo = document.getElementById(blocoId + '-linhas');
-  const isFirst = isPrimeira || corpo.children.length === 0;
-
-  // Cadeias 2+ não incluem a coluna Problema
-  const colsAtivas = temProblema ? COLUNAS : COLUNAS.filter(c => c.id !== 'prob');
-  const gridTemplate = colsAtivas.map(c => c.w).join(' ');
+// ── Linhas ─────────────────────────────────────────────
+function adicionarLinha(cadeiaId, cadeiaNum, primeira) {
+  const container = document.getElementById(cadeiaId + '-linhas');
+  const n = cadeiaNum || parseInt(cadeiaId.split('-')[1]);
 
   const linha = document.createElement('div');
-  linha.className = 'matriz-linha';
-  linha.style.gridTemplateColumns = gridTemplate;
+  linha.className = 'grade-linha';
 
-  colsAtivas.forEach((col) => {
-    const cel = document.createElement('div');
-
-    if (col.id === 'prob') {
-      // Visível apenas na 1ª linha da Cadeia 1; oculto nas linhas extras
-      if (isFirst) {
-        cel.className = col.celCls;
-        cel.contentEditable = 'true';
-        cel.setAttribute('data-col', col.id);
-      } else {
-        cel.className = 'mcell mcell-hidden';
-        cel.contentEditable = 'false';
-      }
+  // Cadeia 1: 1ª linha tem célula editável de Problema.
+  //           Linhas extras têm espaçador invisível (mantém alinhamento com cabeçalho).
+  // Cadeia 2+: sem célula — padding-left no container já faz o recuo.
+  if (n === 1) {
+    const c = document.createElement('div');
+    c.className = 'mcell w-prob';
+    const ehPrimeira = container.children.length === 0;
+    if (ehPrimeira) {
+      c.contentEditable = 'true';
     } else {
-      cel.className = col.celCls;
-      cel.contentEditable = 'true';
-      cel.setAttribute('data-col', col.id);
+      c.contentEditable = 'false';
+      c.style.cssText = 'background:transparent;border:none;pointer-events:none;';
     }
+    linha.appendChild(c);
+  }
 
-    linha.appendChild(cel);
+  // 6 porquês
+  for (let i = 0; i < 6; i++) {
+    const c = document.createElement('div');
+    c.className = 'mcell w-pq';
+    c.contentEditable = 'true';
+    linha.appendChild(c);
+  }
+
+  // Ação, Responsável, Prazo
+  ['w-acao', 'w-resp', 'w-prazo'].forEach(cls => {
+    const c = document.createElement('div');
+    c.className = 'mcell ' + cls;
+    c.contentEditable = 'true';
+    linha.appendChild(c);
   });
 
-  // Botão de deletar linha
-  const delBtn = document.createElement('button');
-  delBtn.className = 'btn-del-linha';
-  delBtn.textContent = '✕';
-  delBtn.title = 'Remover esta linha';
-  delBtn.onclick = () => {
-    const linhas = corpo.querySelectorAll('.matriz-linha');
-    if (linhas.length > 1) linha.remove();
-    else alert('A cadeia precisa de ao menos uma linha.');
-  };
-  linha.appendChild(delBtn);
+  // Botão X — não aparece na 1ª linha da Cadeia 01 (protege o campo Problema)
+  const x = document.createElement('button');
+  x.className = 'btn-x-linha';
+  x.textContent = 'X';
+  x.title = 'Remover linha';
+  const isPrimeiraDaCadeiaUm = (n === 1) && (container.children.length === 0);
+  if (!isPrimeiraDaCadeiaUm) {
+    x.onclick = () => {
+      const linhas = container.querySelectorAll('.grade-linha');
+      if (linhas.length > 1) linha.remove();
+      else mostrarAviso(document.getElementById(cadeiaId), 'A cadeia precisa de ao menos uma linha.');
+    };
+    linha.appendChild(x);
+  }
 
-  corpo.appendChild(linha);
+  container.appendChild(linha);
+}
 
-  // Foca na primeira célula editável
-  if (isFirst) {
-    setTimeout(() => {
-      const first = linha.querySelector('[contenteditable="true"]');
-      if (first) first.focus();
-    }, 60);
+function novaLinha(cadeiaId) {
+  const n = parseInt(cadeiaId.split('-')[1]);
+  adicionarLinha(cadeiaId, n, false);
+}
+
+function mostrarAviso(bloco, msg) {
+  const existente = bloco.querySelector('.aviso-inline');
+  if (existente) return;
+  const aviso = document.createElement('div');
+  aviso.className = 'aviso-inline';
+  aviso.style.cssText = 'margin:0 10px 8px;padding:6px 12px;background:#fff8e1;border:1px solid #f0c040;border-radius:4px;font-size:11px;color:#7a5c00;font-family:Arial,sans-serif;';
+  aviso.textContent = msg;
+  bloco.appendChild(aviso);
+  setTimeout(() => aviso.remove(), 2500);
+}
+
+function removerCadeia(cadeiaId) {
+  const bloco = document.getElementById(cadeiaId);
+  if (!bloco) return;
+
+  // Se já existe um painel de confirmação, remove (toggle)
+  const existente = bloco.querySelector('.confirm-del');
+  if (existente) { existente.remove(); return; }
+
+  const painel = document.createElement('div');
+  painel.className = 'confirm-del';
+  painel.style.cssText = 'background:#fff3f3;border:1.5px solid #c0392b;border-radius:5px;padding:8px 14px;margin:0 10px 10px;display:flex;align-items:center;gap:12px;font-size:12px;font-family:Arial,sans-serif;';
+  painel.innerHTML = `
+    <span style="color:#7b1010;font-weight:bold;">Remover esta cadeia e todo o conteúdo?</span>
+    <button onclick="document.getElementById('${cadeiaId}').remove()"
+      style="background:#c0392b;color:#fff;border:none;border-radius:4px;padding:4px 14px;cursor:pointer;font-weight:bold;font-family:Arial,sans-serif;font-size:12px;">
+      Sim, remover
+    </button>
+    <button onclick="this.closest('.confirm-del').remove()"
+      style="background:#fff;color:#555;border:1px solid #ccc;border-radius:4px;padding:4px 12px;cursor:pointer;font-family:Arial,sans-serif;font-size:12px;">
+      Cancelar
+    </button>`;
+
+  bloco.appendChild(painel);
+}
+
+function removerUltimaLinha(cadeiaId, n) {
+  const container = document.getElementById(cadeiaId + '-linhas');
+  const linhas = container.querySelectorAll('.grade-linha');
+  if (linhas.length > 1) {
+    linhas[linhas.length - 1].remove();
+  } else {
+    const msg = n === 1
+      ? 'A primeira linha da Cadeia 01 não pode ser removida.'
+      : 'A cadeia precisa de ao menos uma linha.';
+    mostrarAviso(document.getElementById(cadeiaId), msg);
   }
 }
 </script>
