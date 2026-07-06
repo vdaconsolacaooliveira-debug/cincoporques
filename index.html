@@ -262,7 +262,7 @@ body { font-family: Arial, sans-serif; background: #e8e8e8; color: #1a1a1a; padd
     <div class="section-title">1. Identificação</div>
     <div class="id-grid" style="grid-template-columns: repeat(5, 1fr)">
       <div class="id-field"><label>Nº do Relatório (NIAT)</label><input type="text" class="val" placeholder="Ex: REL-001/2026"></div>
-      <div class="id-field"><label>Data da ocorrência</label><input type="text" class="val" placeholder="DD/MM/AAAA"></div>
+      <div class="id-field"><label>Data da ocorrência</label><input type="text" class="val" id="data-ocorrencia" placeholder="DD/MM/AAAA" maxlength="10" inputmode="numeric"></div>
       <div class="id-field"><label>Unidade</label>
         <select class="val">
           <option value="">— selecione —</option>
@@ -301,7 +301,7 @@ body { font-family: Arial, sans-serif; background: #e8e8e8; color: #1a1a1a; padd
   <div class="footer">
     <div class="footer-field"><label>Técnico de Segurança</label><input class="fval" type="text" placeholder="Nome e CREA/CFT"></div>
     <div class="footer-field"><label>Gerente Local</label><input class="fval" type="text" placeholder="Nome"></div>
-    <div class="footer-field"><label>Data de emissão</label><input class="fval" type="text" placeholder="DD/MM/AAAA"></div>
+    <div class="footer-field"><label>Data de emissão</label><input class="fval" id="data-emissao-footer" type="text" placeholder="DD/MM/AAAA" maxlength="10" inputmode="numeric"></div>
   </div>
 
 </div>
@@ -332,6 +332,30 @@ window.addEventListener('DOMContentLoaded', () => {
   const p = n => String(n).padStart(2, '0');
   document.getElementById('data-emissao').textContent =
     p(d.getDate()) + '/' + p(d.getMonth() + 1) + '/' + d.getFullYear();
+  // Máscara de data
+  ['data-ocorrencia', 'data-emissao-footer'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', function(e) {
+      let v = this.value.replace(/\D/g, '').slice(0, 8);
+      if (v.length >= 5)      v = v.slice(0,2) + '/' + v.slice(2,4) + '/' + v.slice(4);
+      else if (v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
+      this.value = v;
+    });
+    el.addEventListener('blur', function() {
+      const parts = this.value.split('/');
+      if (parts.length === 3) {
+        const [d, m, y] = parts.map(Number);
+        const valid = d >= 1 && d <= 31 && m >= 1 && m <= 12 && y >= 2000 && y <= 2100;
+        this.style.borderColor = valid ? '' : '#c0392b';
+        this.title = valid ? '' : 'Data inválida';
+      }
+    });
+    el.addEventListener('focus', function() {
+      this.style.borderColor = '';
+      this.title = '';
+    });
+  });
   novaCadeia(); // primeira cadeia ao carregar
 });
 
