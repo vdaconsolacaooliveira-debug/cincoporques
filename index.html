@@ -224,7 +224,7 @@ body { font-family: Arial, sans-serif; background: #e8e8e8; color: #1a1a1a; padd
 <div class="toolbar">
   <label>FOR 005-002 — 5 PORQUÊS</label>
   <select id="sev-select" onchange="setSeverity(this.value)">
-    <option value="grave">🔴 Acidente Grave / Fatal</option>
+    <option value="grave">🔴 Acidente Grave</option>
     <option value="leve">🟠 Acidente Leve</option>
     <option value="incidente">🟢 Incidente / Quase Acidente</option>
   </select>
@@ -247,7 +247,7 @@ body { font-family: Arial, sans-serif; background: #e8e8e8; color: #1a1a1a; padd
 
   <!-- SEVERITY -->
   <div class="severity-band" id="sev-band" onclick="cycleSeverity()">
-    ⚠ ACIDENTE GRAVE / FATAL
+    ⚠ ACIDENTE GRAVE
     <span class="sev-hint">(clique para alternar)</span>
   </div>
 
@@ -303,7 +303,7 @@ body { font-family: Arial, sans-serif; background: #e8e8e8; color: #1a1a1a; padd
 <script>
 // ── Severity ──────────────────────────────────────────
 const SEV = [
-  { cls: '',           label: '⚠ ACIDENTE GRAVE / FATAL',     val: 'grave'     },
+  { cls: '',           label: '⚠ ACIDENTE GRAVE',     val: 'grave'     },
   { cls: 'leve',       label: '⚠ ACIDENTE LEVE',              val: 'leve'      },
   { cls: 'incidente',  label: '⚠ INCIDENTE / QUASE ACIDENTE', val: 'incidente' },
 ];
